@@ -53,6 +53,10 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
+        
+        PlayerPrefs.SetInt("ChallengeMode", 0);
+        PlayerPrefs.SetInt("UnlimitedMode", 0);
+        
         Debug.Log($"LoadLevel called with levelIndex: {levelIndex}");
         PlayerProgress.Instance.currentLevel = levelIndex;
         Debug.Log($"Loading GamePlay scene. Current level set to: {PlayerProgress.Instance.currentLevel}");

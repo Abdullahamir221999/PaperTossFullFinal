@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -95,11 +96,9 @@ public class UIManager : MonoBehaviour
             Debug.LogError("PlayerProgress instance is null!");
         }
     }
-
-
-
-    private void UpdateCoins()
+    public void UpdateCoins()
     {
+        Debug.Log("Updating coins");
         coinText.text = PlayerPrefs.GetInt("Coins").ToString();
     }
 

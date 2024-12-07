@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] starImages;
 
     public bool isChallengeMode = false;  // Toggle to check if challenge mode is active
+    public bool isUnlimitedMode = false;  // Toggle to check if Unlimited mode is active
     public float challengeTimer = 120f;   // Timer in seconds, changeable from the Inspector
     private float currentTimer;
     private bool timerStarted = false; // Flag to check if timer has started
@@ -68,12 +69,27 @@ public class GameManager : MonoBehaviour
 
         pauseMainMenuButton.onClick.AddListener(LoadMainMenu);
         pauseRetryButton.onClick.AddListener(RetryLevel);
-
+        if (PlayerPrefs.GetInt("ChallengeMode") == 1)
+        {
+            isChallengeMode = true;
+            isUnlimitedMode = false;
+        }
+        else if (PlayerPrefs.GetInt("UnlimitedMode") == 1)
+        {
+            isChallengeMode = false;
+            isUnlimitedMode = true;
+        }
         // Initialize the timer for challenge mode
         if (isChallengeMode)
         {
             currentTimer = challengeTimer;
             UpdateTimerUI(); // Display the initial timer
+        }
+        if (isUnlimitedMode)
+        {
+            maxTries = 1000;
+            currentTimer = 1000000;
+            UpdateTimerUI();
         }
     }
 
@@ -97,6 +113,11 @@ public class GameManager : MonoBehaviour
     // Updates the timer UI text
     private void UpdateTimerUI()
     {
+        if (isUnlimitedMode)
+        {
+            return;
+        }
+        
         if (timerText != null)
         {
             int minutes = Mathf.FloorToInt(currentTimer / 60F);
@@ -161,6 +182,8 @@ public class GameManager : MonoBehaviour
 
     public void FinishGame()
     {
+        if(isUnlimitedMode) return;
+        
         if (hasBaggedAtLeastOne)
         {
             // Player made at least one bucket, show win panel

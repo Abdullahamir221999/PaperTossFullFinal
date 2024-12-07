@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class PaperThrow3D : MonoBehaviour
 {
+    
+    public ShopData ballData;
+    
     private Vector3 startTouchPosition, endTouchPosition;
     private float startTime, endTime;
     private Rigidbody rb;
@@ -41,6 +44,16 @@ public class PaperThrow3D : MonoBehaviour
 
     void Start()
     {
+        ballData = Resources.Load<ShopData>("BallData");
+        Renderer rend = GetComponent<Renderer>();
+        foreach (var BallData in ballData.shopItems)
+        {
+            if (BallData.ballState == BallState.Equipped)
+            {
+                rend.material = BallData.ballMaterial;
+            }
+        }
+        
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         initialPosition = transform.position;
@@ -57,6 +70,10 @@ public class PaperThrow3D : MonoBehaviour
             maxAttempts = 3; // Regular mode limit
         }
 
+        if (GameManager.Instance.isUnlimitedMode)
+        {
+            maxAttempts = 1000;
+        }
         // Assign binTransform based on the "Bucket" tag
         GameObject bucket = GameObject.FindGameObjectWithTag("Bucket");
         if (bucket != null)
@@ -160,7 +177,7 @@ public class PaperThrow3D : MonoBehaviour
         if (!GameManager.Instance.isChallengeMode)
         {
             attempts++;
-
+            if (GameManager.Instance.isUnlimitedMode) return;
             if (attempts >= maxAttempts)
             {
                 StartCoroutine(EndLevelWithDelay());

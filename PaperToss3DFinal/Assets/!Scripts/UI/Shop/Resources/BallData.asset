@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9fce0a71ad26f4da317c3d683f361c, type: 3}
+  m_Name: BallData
+  m_EditorClassIdentifier: 
+  shopItems:
+  - ballName: Basic
+    ballSprite: {fileID: 0}
+    ballMaterial: {fileID: 2100000, guid: 9270dfe7009534b68ae11d1b3409cd51, type: 2}
+    ballType: 500
+    ballState: 2
+  - ballName: Common
+    ballSprite: {fileID: 0}
+    ballMaterial: {fileID: 2100000, guid: a50930a16f225f4438c1813e9c3a01cd, type: 2}
+    ballType: 500
+    ballState: 0
+  - ballName: Rare
+    ballSprite: {fileID: 0}
+    ballMaterial: {fileID: 2100000, guid: 23583ec6b95e6214ca18820ce7d21b96, type: 2}
+    ballType: 1000
+    ballState: 1
+  - ballName: Bought
+    ballSprite: {fileID: 0}
+    ballMaterial: {fileID: 2100000, guid: 31f57112eba31fa4ea46863fb61b6de4, type: 2}
+    ballType: 1000
+    ballState: 1

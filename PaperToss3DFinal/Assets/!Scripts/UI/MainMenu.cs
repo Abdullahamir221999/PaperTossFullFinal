@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public Button playButton;
     public Button challengeModeButton; // New button for challenge mode
+    public Button unlimitedModeButton; // New button for challenge mode
     public TextMeshProUGUI totalStarsText; // UI Text to display total stars
     public GameObject[] levelButtons;      // Array of level buttons or indicators
 
@@ -28,7 +29,7 @@ public class MainMenu : MonoBehaviour
 
         playButton.onClick.AddListener(StartGame);
         challengeModeButton.onClick.AddListener(StartChallengeMode); // Add listener for Challenge Mode button
-
+        unlimitedModeButton.onClick.AddListener(UnlimitedMode);
         Debug.Log("Play and Challenge Mode button listeners added successfully");
 
         // Check if LevelManager exists
@@ -80,6 +81,14 @@ public class MainMenu : MonoBehaviour
     public void StartChallengeMode()
     {
         Debug.Log("StartChallengeMode method called");
+        PlayerPrefs.SetInt("ChallengeMode", 1);
         SceneManager.LoadScene("ChallengeMode"); // Replace "ChallengeMode" with your challenge scene name
     }
+    
+    public void UnlimitedMode(){
+        Debug.Log("UnlimitedMode method called");
+        PlayerPrefs.SetInt("UnlimitedMode", 1);
+        SceneManager.LoadScene("ChallengeMode");    
+    }
+    
 }
